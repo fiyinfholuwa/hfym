@@ -614,7 +614,7 @@
     </div>
 
     <div class="mt-3">
-        <label for="address">Dashboard Address</label>
+        <label for="address">Home Address</label>
         <textarea class="form-control" id="address" name="address"></textarea>
     </div>
 
