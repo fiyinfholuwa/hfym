@@ -478,7 +478,7 @@
             <i class="fas fa-heart floating-heart"></i>
         </div>
         
-        <div  class="container">
+        <div style="margin-top:60px;"  class="container">
             <div class="row align-items-center min-vh-100">
                 <div class="col-lg-10 mx-auto text-center hero-content">
                     <h1 class="hero-title font-display">
