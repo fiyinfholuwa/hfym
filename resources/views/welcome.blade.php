@@ -589,7 +589,7 @@
                         </h2>
                         <p class="text-center mb-4 text-muted">Join us for this transformative experience. Complete the form below to secure your spot.</p>
                         
-                        <form id="registrationForm">
+                       <form id="registrationForm" action="{{ route('couple.register') }}" method="POST">
     @csrf
     <div class="row">
         <div class="col-md-6">
@@ -614,14 +614,14 @@
     </div>
 
     <div class="mt-3">
-        <label for="address">Home Address</label>
-        <textarea class="form-control" id="address" name="address"></textarea>
+        <label for="address">Home Address *</label>
+        <textarea class="form-control" id="address" name="address" required></textarea>
     </div>
 
     <div class="row mt-3">
         <div class="col-md-6">
-            <label for="marriageYears">Years Married</label>
-            <select class="form-control" id="marriageYears" name="marriageYears">
+            <label for="marriageYears">Years Married *</label>
+            <select class="form-control" id="marriageYears" name="marriageYears" required>
                 <option value="">Select...</option>
                 <option value="0-2">0-2 years</option>
                 <option value="3-5">3-5 years</option>
@@ -630,8 +630,8 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label for="church">Church/Fellowship</label>
-            <input type="text" class="form-control" id="church" name="church">
+            <label for="church">Church/Fellowship *</label>
+            <input type="text" class="form-control" id="church" name="church" required>
         </div>
     </div>
 
@@ -656,6 +656,7 @@
         Submit Registration
     </button>
 </form>
+
 
                     </div>
                 </div>
@@ -712,34 +713,7 @@
         });
 
       
-      document.getElementById('registrationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const form = this; // store reference to form
-    const formData = new FormData(form);
-
-    fetch('/register-couple', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            toastr.success(data.message);
-            form.reset(); // now works
-        } else if (data.status === 'error') {
-            toastr.error('Please fix the errors and try again.');
-            console.error(data.errors);
-        }
-    })
-    .catch(error => {
-        toastr.error('An unexpected error occurred.');
-        console.error('Error:', error);
-    });
-});
+      
 
 
         // Add entrance animations on scroll
@@ -784,5 +758,25 @@
             });
         });
     </script>
+
+    <script>
+    @if(session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+
+    @if($errors->any())
+        toastr.error("Please check the form for errors and try again.");
+    @endif
+</script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "5000"
+    };
+</script>
+
 </body>
 </html>

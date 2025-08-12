@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/register-couple', [\App\Http\Controllers\RegistrationController::class, 'store']);
+Route::post('/register-couple', [\App\Http\Controllers\RegistrationController::class, 'store'])->name('couple.register');
 Route::get('/dashboard', function () {
     // Fetch all registrations ordered by latest first
     $registrations = Registration::orderBy('created_at', 'desc')->get();
