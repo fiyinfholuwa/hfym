@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('marriage_years');
             $table->string('church');
+            $table->string('coming_type');
             $table->text('expectations')->nullable();
             $table->text('prayer_requests')->nullable();
             $table->timestamps();

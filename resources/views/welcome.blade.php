@@ -619,7 +619,7 @@
     </div>
 
     <div class="row mt-3">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="marriageYears">Years Married *</label>
             <select class="form-control" id="marriageYears" name="marriageYears" required>
                 <option value="">Select...</option>
@@ -629,7 +629,16 @@
                 <option value="11+">11+ years</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
+            <label for="marriageYears">How will you attend? *</label>
+            <select class="form-control" id="coming_type" name="coming_type" required>
+                <option value="">Select...</option>
+                <option value="physical">Physical</option>
+                <option value="virtual">Virtual</option>
+                
+            </select>
+        </div>
+        <div class="col-md-4">
             <label for="church">Church/Fellowship *</label>
             <input type="text" class="form-control" id="church" name="church" required>
         </div>

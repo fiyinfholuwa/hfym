@@ -21,6 +21,7 @@ class RegistrationController extends Controller
         'church'         => 'required|string|max:255',
         'expectations'   => 'nullable|string',
         'prayerRequests' => 'nullable|string',
+        'coming_type' => 'nullable|string',
     ]);
 
     Registration::create([
@@ -33,6 +34,7 @@ class RegistrationController extends Controller
         'church'          => $validated['church'],
         'expectations'    => $validated['expectations'] ?? null,
         'prayer_requests' => $validated['prayerRequests'] ?? null,
+        'coming_type' => $validated['coming_type'] ?? null,
     ]);
 
     return redirect()

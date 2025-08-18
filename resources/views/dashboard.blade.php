@@ -281,6 +281,8 @@
                             <th>Wife Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                                                        <th>Attendance Mode</th>
+
                             <th>Address</th>
                             <th>Marriage Years</th>
                             <th>Church</th>
@@ -298,6 +300,7 @@
                             <td>{{ $registration->wife_name }}</td>
                             <td>{{ $registration->email }}</td>
                             <td>{{ $registration->phone }}</td>
+                            <td>{{ $registration->coming_type }}</td>
                             <td class="truncate" title="{{ $registration->address }}">{{ Str::limit($registration->address, 30) }}</td>
                             <td><span class="badge badge-years">{{ $registration->marriage_years }}</span></td>
                             <td class="truncate" title="{{ $registration->church }}">{{ Str::limit($registration->church, 20) }}</td>

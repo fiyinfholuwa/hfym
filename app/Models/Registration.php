@@ -8,6 +8,6 @@ class Registration extends Model
 {
     protected $fillable = [
         'husband_name', 'wife_name', 'email', 'phone', 'address',
-        'marriage_years', 'church', 'expectations', 'prayer_requests'
+        'marriage_years', 'church', 'expectations', 'prayer_requests','coming_type'
     ];
 }
