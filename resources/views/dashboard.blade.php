@@ -52,6 +52,7 @@
         
         .table {
             margin-bottom: 0;
+            min-width: 1200px; /* Ensure table has minimum width for all columns */
         }
         
         .table thead th {
@@ -63,6 +64,7 @@
             font-size: 0.85rem;
             letter-spacing: 0.5px;
             padding: 1rem 0.75rem;
+            white-space: nowrap; /* Prevent header text wrapping */
         }
         
         .table tbody tr {
@@ -71,7 +73,7 @@
         
         .table tbody tr:hover {
             background-color: #f8f9fa;
-            transform: scale(1.005);
+            transform: scale(1.002);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
@@ -79,6 +81,29 @@
             padding: 1rem 0.75rem;
             vertical-align: middle;
             border-color: #e9ecef;
+            word-wrap: break-word; /* Allow long words to break */
+            max-width: none; /* Remove any width restrictions */
+        }
+        
+        /* Specific column styling for better readability */
+        .table td:nth-child(6) { /* Address column */
+            min-width: 200px;
+            max-width: 300px;
+        }
+        
+        .table td:nth-child(9) { /* Church column */
+            min-width: 150px;
+            max-width: 250px;
+        }
+        
+        .table td:nth-child(10) { /* Expectations column */
+            min-width: 200px;
+            max-width: 400px;
+        }
+        
+        .table td:nth-child(11) { /* Prayer Requests column */
+            min-width: 200px;
+            max-width: 400px;
         }
         
         .action-btn {
@@ -166,11 +191,10 @@
             font-weight: 500;
         }
         
-        .truncate {
-            max-width: 150px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        /* Enhanced table responsiveness without truncation */
+        .table-responsive {
+            max-height: 70vh; /* Limit table height for better navigation */
+            overflow-y: auto;
         }
         
         @media (max-width: 768px) {
@@ -180,6 +204,7 @@
             
             .table-responsive {
                 font-size: 0.875rem;
+                max-height: 60vh;
             }
             
             .action-btn {
@@ -187,8 +212,14 @@
                 margin: 1px;
             }
             
-            .truncate {
-                max-width: 100px;
+            .table td {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            /* Stack content vertically in mobile for better readability */
+            .table td:nth-child(10), 
+            .table td:nth-child(11) {
+                min-width: 250px;
             }
         }
         
@@ -216,6 +247,33 @@
             font-size: 4rem;
             margin-bottom: 1rem;
             opacity: 0.5;
+        }
+
+        /* Custom scrollbar for table */
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #5a67d8, #6b46c1);
+        }
+
+        /* Full content display for important columns */
+        .full-content {
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -281,8 +339,7 @@
                             <th>Wife Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                                                        <th>Attendance Mode</th>
-
+                            <th>Attendance Mode</th>
                             <th>Address</th>
                             <th>Marriage Years</th>
                             <th>Church</th>
@@ -301,11 +358,11 @@
                             <td>{{ $registration->email }}</td>
                             <td>{{ $registration->phone }}</td>
                             <td>{{ $registration->coming_type }}</td>
-                            <td class="truncate" title="{{ $registration->address }}">{{ Str::limit($registration->address, 30) }}</td>
+                            <td class="full-content">{{ $registration->address }}</td>
                             <td><span class="badge badge-years">{{ $registration->marriage_years }}</span></td>
-                            <td class="truncate" title="{{ $registration->church }}">{{ Str::limit($registration->church, 20) }}</td>
-                            <td class="truncate" title="{{ $registration->expectations }}">{{ Str::limit($registration->expectations, 30) }}</td>
-                            <td class="truncate" title="{{ $registration->prayer_requests }}">{{ Str::limit($registration->prayer_requests, 30) }}</td>
+                            <td class="full-content">{{ $registration->church }}</td>
+                            <td class="full-content">{{ $registration->expectations }}</td>
+                            <td class="full-content">{{ $registration->prayer_requests }}</td>
                             <td>{{ $registration->created_at->format('Y-m-d H:i') }}</td>
                             {{-- <td>
                                 <button class="action-btn btn-edit" onclick="editRecord({{ $registration->id }})">
@@ -417,9 +474,7 @@
                     allRows.forEach(row => {
                         const cells = row.querySelectorAll('td:not(:last-child)');
                         const rowText = Array.from(cells).map(cell => {
-                            const title = cell.getAttribute('title');
-                            const text = cell.textContent.toLowerCase();
-                            return title ? title.toLowerCase() : text;
+                            return cell.textContent.toLowerCase();
                         }).join(' ');
                         
                         if (rowText.includes(searchTerm)) {
@@ -476,9 +531,7 @@
             const row = button.closest('tr');
             const cells = row.querySelectorAll('td:not(:last-child)');
             const data = Array.from(cells).map(cell => {
-                const titleAttr = cell.getAttribute('title');
-                const textContent = cell.textContent.trim();
-                return titleAttr || textContent;
+                return cell.textContent.trim();
             });
             
             const tsvData = data.join('\t');
