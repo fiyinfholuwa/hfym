@@ -42,6 +42,39 @@ class RegistrationController extends Controller
         ->with('success', 'Registration successful!');
 }
 
+ // Confirm attendance
+    public function confirmAttendance(Request $request, $id)
+    {
+        $request->validate([
+            'attendance' => 'required|in:husband,wife,both'
+        ]);
+
+        $registration = Registration::findOrFail($id);
+
+        switch ($request->attendance) {
+            case 'husband':
+                $registration->husband_attendance = 'confirmed';
+                $registration->wife_attendance = 'absent';
+                break;
+            case 'wife':
+                $registration->wife_attendance = 'confirmed';
+                $registration->husband_attendance = 'absent';
+                break;
+            case 'both':
+                $registration->husband_attendance = 'confirmed';
+                $registration->wife_attendance = 'confirmed';
+                break;
+        }
+
+        $registration->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Attendance updated successfully.',
+            'data' => $registration
+        ]);
+    }
+
 }
 
 ?>

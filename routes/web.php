@@ -1,8 +1,10 @@
 <?php
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\RegistrationController;
 use App\Models\Registration;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -11,11 +13,25 @@ Route::get('/', function () {
 
 Route::post('/register-couple', [\App\Http\Controllers\RegistrationController::class, 'store'])->name('couple.register');
 Route::get('/dashboard', function () {
-    // Fetch all registrations ordered by latest first
-    $registrations = Registration::orderBy('created_at', 'desc')->get();
-        
-    return view('dashboard', compact('registrations'));
+    // Fetch all registrations ordered by latest first        
+    $registrations = Registration::latest()->get();
+
+        $stats = [
+            'husband_only' => Registration::where('husband_attendance', 'confirmed')
+                ->where('wife_attendance', '!=', 'confirmed')->count(),
+            'wife_only' => Registration::where('wife_attendance', 'confirmed')
+                ->where('husband_attendance', '!=', 'confirmed')->count(),
+            'both' => Registration::where('husband_attendance', 'confirmed')
+                ->where('wife_attendance', 'confirmed')->count(),
+        ];
+
+        return view('dashboard', compact('registrations', 'stats'));
+
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::post('/registrations/{id}/confirm-attendance', [RegistrationController::class, 'confirmAttendance']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
