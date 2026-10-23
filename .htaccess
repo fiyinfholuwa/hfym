@@ -1,0 +1,15 @@
+# Fallback for hosts that point the domain at the Laravel project root.
+# The preferred document root is still: /path/to/project/public
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Protect application code, secrets, dependencies and development files.
+    RewriteRule ^(?:\.env(?:\.|$)|\.git(?:/|$)|app(?:/|$)|bootstrap(?:/|$)|config(?:/|$)|database(?:/|$)|resources(?:/|$)|routes(?:/|$)|storage(?:/|$)|tests(?:/|$)|vendor(?:/|$)|artisan$|composer\.(?:json|lock)$|package(?:-lock)?\.json$|phpunit\.xml$|vite\.config\.js$) - [F,L,NC]
+
+    # Let the public directory handle its own rewrite rules.
+    RewriteRule ^public(?:/|$) - [L]
+
+    # Serve public assets and route all other requests through public/index.php.
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
