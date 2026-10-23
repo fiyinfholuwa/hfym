@@ -14,7 +14,7 @@ class RegistrationController extends Controller
     $validated = $request->validate([
         'husbandName'    => 'required|string|max:255',
         'wifeName'       => 'required|string|max:255',
-        'email'          => 'required|email|max:255',
+        'email'          => 'required|email|max:255|unique:registrations,email',
         'phone'          => 'required|string|max:20',
         'address'        => 'required|string|max:255',
         'marriageYears'  => 'required',
@@ -37,9 +37,19 @@ class RegistrationController extends Controller
         'coming_type' => $validated['coming_type'] ?? null,
     ]);
 
+    $response = [
+        'success' => true,
+        'message' => 'Registration successful!',
+        'whatsapp_url' => config('services.whatsapp.group_url'),
+    ];
+
+    if ($request->expectsJson()) {
+        return response()->json($response);
+    }
+
     return redirect()
         ->back()
-        ->with('success', 'Registration successful!');
+        ->with('success', $response['message']);
 }
 
  // Confirm attendance

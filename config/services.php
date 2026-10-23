@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'whatsapp' => [
+        'group_url' => 'https://chat.whatsapp.com/GEJIWKQBgKbIEZoHmlylzp?s=cl&p=i&mlu=4&ilr=4',
+    ],
+
 ];
