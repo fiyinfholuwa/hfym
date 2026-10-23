@@ -41,7 +41,7 @@
         .section-heading h2 { margin: 15px 0 12px; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.06; letter-spacing: -.045em; }
         .section-heading p { color: var(--muted); font-size: 1.05rem; margin: 0; }
 
-        .site-nav { position: absolute; inset: 0 0 auto; z-index: 10; padding: 22px 0; }
+        .site-nav { position: fixed; inset: 0 0 auto; z-index: 10; padding: 16px 0; background: rgba(4,27,66,.84); border-bottom: 1px solid rgba(255,255,255,.12); box-shadow: 0 10px 28px rgba(4,27,66,.14); backdrop-filter: blur(16px); }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
         .brand { display: inline-flex; align-items: center; color: #fff; text-decoration: none; font-weight: 700; letter-spacing: -.02em; }
         .brand-mark { width: 194px; height: 72px; padding: 0; border-radius: 12px; background: #fff; display: grid; place-items: center; box-shadow: 0 9px 24px rgba(0,0,0,.18); overflow: visible; }
@@ -61,6 +61,7 @@
         .hero h1 { margin: 18px 0 22px; font-size: clamp(3.4rem, 7vw, 6.6rem); line-height: .93; letter-spacing: -.06em; }
         .hero h1 span { color: #ffb9bd; font-style: italic; }
         .hero-intro { max-width: 560px; color: rgba(255,255,255,.78); font-size: 1.22rem; }
+        .hero-date { display: block; margin-bottom: 10px; color: #fff; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
         .verse { margin: 28px 0 32px; padding: 19px 22px; border-left: 2px solid var(--gold); color: #f6edda; font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; line-height: 1.5; }
         .verse small { display: block; margin-top: 8px; color: #c4d6ec; font-family: 'DM Sans', sans-serif; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
         .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
@@ -197,6 +198,7 @@
         }
         @media (max-width: 620px) {
             .container { width: min(100% - 28px, 1160px); }
+            .site-nav { padding: 12px 0; }
             .nav-links a:not(.nav-cta) { display: none; }
             .brand { font-size: .85rem; }
             .brand-mark { width: 146px; height: 56px; }
@@ -233,7 +235,7 @@
                 <div class="hero-copy">
                     <span class="eyebrow">Healing For Young Marriages · 2026</span>
                     <h1 class="display">Healthy <span>all round.</span></h1>
-                    <p class="hero-intro">A quiet weekend away for couples who want to pause, listen, pray and return to the path of their divinely ordained marital destiny.</p>
+                    <p class="hero-intro"><strong class="hero-date">20–22 November 2026 · Friday evening → Sunday, 3:00 PM</strong>A quiet weekend away for couples who want to pause, listen, pray and return to the path of their divinely ordained marital destiny.</p>
                     <div class="verse">“Beloved, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth.”<small>3 John 1:2 KJV</small></div>
                     <div class="actions"><a class="button" href="#register">Reserve your place <span aria-hidden="true">→</span></a><a class="button button-ghost" href="#letter">Read the invitation</a></div>
                 </div>
@@ -250,7 +252,7 @@
 
         <section class="facts" aria-label="Retreat facts">
             <div class="container facts-grid">
-                <div class="fact"><span class="fact-icon">◷</span><div><strong>Friday evening → Sunday</strong><span>Until 3:00 PM on Sunday</span></div></div>
+                <div class="fact"><span class="fact-icon">◷</span><div><strong>20–22 November 2026</strong><span>Friday evening → Sunday, 3:00 PM</span></div></div>
                 <div class="fact"><span class="fact-icon">♡</span><div><strong>Come as a couple</strong><span>A shared investment in your journey</span></div></div>
                 <div class="fact"><span class="fact-icon">⌂</span><div><strong>Feeding & accommodation</strong><span>Provided for everyone who has need</span></div></div>
             </div>
@@ -275,7 +277,7 @@
             </div>
         </section>
 
-        <section class="pause-section"><div class="container pause-grid"><div><span class="eyebrow">Clear your schedules</span><h2 class="display">Come away together for a moment.</h2><p>Retreat will commence Friday evening and run through Saturday and Sunday until 3pm on Sunday. We can’t wait to see you all.</p><div class="schedule" aria-label="Retreat schedule"><div class="schedule-row"><strong>Friday evening</strong><span>Arrival & settling in</span></div><div class="schedule-row"><strong>Saturday</strong><span>Teaching, rest, prayer & conversations</span></div><div class="schedule-row"><strong>Sunday · 3:00 PM</strong><span>Close of retreat</span></div></div></div><div class="pause-orbit" aria-hidden="true"><div class="pause-orb">♡</div></div></div></section>
+        <section class="pause-section"><div class="container pause-grid"><div><span class="eyebrow">Clear your schedules</span><h2 class="display">Come away together for a moment.</h2><p>Retreat will commence on Friday, 20 November, and run through Saturday, 21 November, and Sunday, 22 November, until 3:00 PM. We can’t wait to see you all.</p><div class="schedule" aria-label="Retreat schedule"><div class="schedule-row"><strong>Friday · 20 Nov</strong><span>Arrival & settling in</span></div><div class="schedule-row"><strong>Saturday · 21 Nov</strong><span>Teaching, rest, prayer & conversations</span></div><div class="schedule-row"><strong>Sunday · 22 Nov · 3:00 PM</strong><span>Close of retreat</span></div></div></div><div class="pause-orbit" aria-hidden="true"><div class="pause-orb">♡</div></div></div></section>
 
         <section class="register-section" id="register"><div class="container register-grid"><div class="register-copy"><span class="eyebrow">Your next step</span><h2 class="display">Make room for your marriage.</h2><p>Plan ahead to attend the retreat together. Tell us how to prepare to welcome you both.</p><div class="register-note">“We trust God to bring healing at the coming Retreat.”<br><strong>— Peniela Eniayo Akintujoye</strong></div></div>
             <div class="form-card"><h3>Register for the retreat</h3><p>Complete the form below to secure your place for Healing For Young Marriages 2026.</p>

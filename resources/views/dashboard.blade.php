@@ -163,12 +163,12 @@
 
         <main class="main-content">
             <header class="topbar">
-                <div><div class="topbar-kicker">MIV Rhema House · 2026</div><h1>Registration dashboard</h1></div>
+                <div><div class="topbar-kicker">MIV Rhema House · 20–22 November 2026</div><h1>Registration dashboard</h1></div>
                 <div class="topbar-actions"><a class="visit-link" href="{{ url('/') }}" target="_blank" rel="noopener"><i class="bi bi-arrow-up-right"></i> Retreat page</a><span class="admin-chip">Live workspace</span></div>
             </header>
 
             <div class="page-body">
-                <div class="welcome-row"><div><h2>Good to see you, {{ auth()->user()->name ?? 'Admin' }}.</h2><p>Keep track of every couple preparing for the retreat.</p></div><span class="retreat-pill"><i class="bi bi-heart-fill"></i> Healing For Young Marriages 2026</span></div>
+                <div class="welcome-row"><div><h2>Good to see you, {{ auth()->user()->name ?? 'Admin' }}.</h2><p>Keep track of every couple preparing for the retreat.</p></div><span class="retreat-pill"><i class="bi bi-heart-fill"></i> Healing For Young Marriages · 20–22 Nov 2026</span></div>
 
                 <section class="stats-grid" aria-label="Registration summary">
                     <article class="stat-card"><span class="stat-icon"><i class="bi bi-people-fill"></i></span><strong class="stat-number">{{ count($registrations) }}</strong><span class="stat-label">Total registrations</span></article>
