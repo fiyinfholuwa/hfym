@@ -224,6 +224,7 @@
             <nav class="nav-links" aria-label="Main navigation">
                 <a href="#letter">The burden</a>
                 <a href="#rhythm">The retreat</a>
+                <a href="{{ route('anonymous-concerns.create') }}">Share a concern</a>
                 <a class="nav-cta" href="#register">Register together</a>
             </nav>
         </div>

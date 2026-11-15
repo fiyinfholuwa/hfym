@@ -2,6 +2,8 @@
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\AnonymousConcernController;
+use App\Models\AnonymousConcern;
 use App\Models\Registration;
 use Illuminate\Support\Facades\Route;
 
@@ -12,9 +14,14 @@ Route::get('/', function () {
 });
 
 Route::post('/register-couple', [\App\Http\Controllers\RegistrationController::class, 'store'])->name('couple.register');
+Route::get('/anonymous', [AnonymousConcernController::class, 'create'])->name('anonymous-concerns.create');
+Route::post('/anonymous-concerns', [AnonymousConcernController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('anonymous-concerns.store');
 Route::get('/dashboard', function () {
     // Fetch all registrations ordered by latest first        
     $registrations = Registration::latest()->get();
+    $concerns = AnonymousConcern::latest()->get();
 
         $stats = [
             'husband_only' => Registration::where('husband_attendance', 'confirmed')
@@ -25,7 +32,7 @@ Route::get('/dashboard', function () {
                 ->where('wife_attendance', 'confirmed')->count(),
         ];
 
-        return view('dashboard', compact('registrations', 'stats'));
+        return view('dashboard', compact('registrations', 'stats', 'concerns'));
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 

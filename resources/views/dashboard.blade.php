@@ -82,6 +82,13 @@
         #registrationTable tbody td { padding: 17px 12px; border-bottom: 1px solid #edf1f6; color: #536278; font-size: .84rem; vertical-align: middle; }
         #registrationTable tbody tr:last-child td { border-bottom: 0; }
         #registrationTable tbody tr:hover td { background: #f9fbfe; }
+        #concernTable { width: 100% !important; margin-top: 0 !important; border-collapse: separate; border-spacing: 0; }
+        #concernTable thead th { padding: 16px 12px; border-bottom: 1px solid var(--line); color: #7a8799; background: #fbfcfe; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+        #concernTable tbody td { padding: 17px 12px; border-bottom: 1px solid #edf1f6; color: #536278; font-size: .84rem; vertical-align: top; }
+        #concernTable tbody tr:last-child td { border-bottom: 0; }
+        #concernTable tbody tr:hover td { background: #f9fbfe; }
+        .concern-text { min-width: 360px; max-width: 720px; color: var(--ink); white-space: pre-wrap; }
+        .topic-badge { display: inline-flex; padding: 6px 10px; border-radius: 999px; color: var(--blue); background: #edf4fc; font-size: .7rem; font-weight: 700; white-space: nowrap; }
         .couple-name { color: var(--ink); font-weight: 700; white-space: nowrap; }
         .id-cell { color: var(--blue); font-size: .75rem; font-weight: 700; }
         .muted-cell { display: block; max-width: 210px; overflow: hidden; color: #637289; text-overflow: ellipsis; white-space: nowrap; }
@@ -153,6 +160,7 @@
             <div class="sidebar-label">Workspace</div>
             <nav class="sidebar-nav" aria-label="Dashboard navigation">
                 <a class="active" href="{{ route('dashboard') }}"><i class="bi bi-grid-1x2-fill"></i> Registrations</a>
+                <a href="#concerns"><i class="bi bi-chat-left-heart-fill"></i> Anonymous concerns</a>
                 <a href="{{ url('/') }}"><i class="bi bi-box-arrow-up-right"></i> View retreat page</a>
             </nav>
             <div class="sidebar-footer">
@@ -203,6 +211,27 @@
                                     </tr>
                                 @empty
                                     <tr><td class="empty-state" colspan="15">No registrations found yet.</td></tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="table-card mt-4" id="concerns" aria-labelledby="concerns-title">
+                    <div class="table-card-head"><div><h2 id="concerns-title">Anonymous concerns</h2><p>Messages shared without names or contact details.</p></div><span class="record-count">{{ count($concerns) }} messages</span></div>
+                    <div class="table-wrap">
+                        <table class="table align-middle" id="concernTable">
+                            <thead><tr><th>ID</th><th>Topic</th><th>Concern</th><th>Received</th></tr></thead>
+                            <tbody>
+                                @forelse($concerns as $concern)
+                                    <tr>
+                                        <td><span class="id-cell">#{{ $concern->id }}</span></td>
+                                        <td><span class="topic-badge">{{ $concern->topic ?: 'General' }}</span></td>
+                                        <td><div class="concern-text">{{ $concern->concern }}</div></td>
+                                        <td>{{ $concern->created_at->format('M d, Y · g:i A') }}</td>
+                                    </tr>
+                                @empty
+                                    <tr><td class="empty-state" colspan="4">No anonymous concerns have been shared yet.</td></tr>
                                 @endforelse
                             </tbody>
                         </table>
