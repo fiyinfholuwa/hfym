@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Always fetch fresh Laravel pages so visitors do not need to clear
+        // an old page or error response from their browser cache.
+        $middleware->append(\App\Http\Middleware\NoCache::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
