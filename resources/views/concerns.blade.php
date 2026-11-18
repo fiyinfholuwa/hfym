@@ -68,8 +68,8 @@
     <main class="page">
         <div class="container page-grid">
             <section class="form-card" aria-labelledby="form-title">
-                <h2 id="form-title">Share a concern anonymously</h2>
-                <p>Choose a topic if you wish, then write what you would like us to know. Your name and contact details are not requested.</p>
+                <h2 id="form-title">Tell us what you’re facing in your marriage</h2>
+                <p>Tell us the area of challenge in your marriage that you would like us to address at the Healing For Young Marriages Retreat. Your name and contact details are not requested.</p>
                 @if(session('concern_success'))<div class="alert" role="status">{{ session('concern_success') }}</div>@endif
                 @if($errors->has('concern') || $errors->has('topic'))
                     <ul class="error-list" role="alert">
@@ -98,8 +98,8 @@
                         </div>
                     </fieldset>
                     <div class="field">
-                        <label for="concern">What would you like us to know? *</label>
-                        <textarea id="concern" name="concern" maxlength="5000" required placeholder="Share the detail of what is concerning you...">{{ old('concern') }}</textarea>
+                        <label for="concern">What challenge would you like us to address? *</label>
+                        <textarea id="concern" name="concern" maxlength="5000" required placeholder="Describe the challenge you’re facing in your marriage...">{{ old('concern') }}</textarea>
                     </div>
                     <button class="button" type="submit">Send anonymously <span aria-hidden="true">→</span></button>
                 </form>
